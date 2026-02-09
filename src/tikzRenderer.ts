@@ -37,7 +37,7 @@ export class TikzRenderer {
 
 		// Toolbar
 		const toolbar = wrapper.createDiv({ cls: "tikz-enhanced-toolbar" });
-		this.buildToolbar(toolbar, wrapper);
+		this.buildToolbar(toolbar, wrapper, effectiveScale);
 
 		// Content area — use CSS zoom (not transform) so container resizes with content
 		const content = wrapper.createDiv({ cls: "tikz-enhanced-content" });
@@ -222,7 +222,7 @@ export class TikzRenderer {
 		container.appendChild(imported);
 	}
 
-	private buildToolbar(toolbar: HTMLElement, wrapper: HTMLElement): void {
+	private buildToolbar(toolbar: HTMLElement, wrapper: HTMLElement, initialZoom = 1): void {
 		// Export button
 		const exportBtn = toolbar.createEl("button", {
 			cls: "tikz-enhanced-btn tikz-enhanced-export-btn",
@@ -257,7 +257,7 @@ export class TikzRenderer {
 		});
 		zoomOut.setText("\u2212");
 
-		const zoomLabel = toolbar.createSpan({ cls: "tikz-enhanced-zoom-label", text: "100%" });
+		const zoomLabel = toolbar.createSpan({ cls: "tikz-enhanced-zoom-label", text: `${Math.round(initialZoom * 100)}%` });
 
 		const zoomIn = toolbar.createEl("button", {
 			cls: "tikz-enhanced-btn tikz-enhanced-zoom-btn",
@@ -265,8 +265,15 @@ export class TikzRenderer {
 		});
 		zoomIn.setText("+");
 
-		let currentZoom = 1;
+		let currentZoom = initialZoom;
 		const zoomSteps = [0.5, 0.75, 1, 1.5, 2];
+
+		// Set initial zoom class
+		if (initialZoom > 1) {
+			wrapper.classList.add("tikz-enhanced-zoom-2");
+		} else {
+			wrapper.classList.add("tikz-enhanced-zoom-1");
+		}
 
 		const updateZoom = (zoom: number) => {
 			currentZoom = zoom;
