@@ -1,10 +1,25 @@
 <img width=275 align="right" src="./imgs/screenshot.png">
 
-# Obsidian TikZJax
+# TikZJax Enhanced
 
-A plugin for Obsidian that lets you render LaTeX and TikZ diagrams in your notes.
+An enhanced Obsidian plugin for rendering LaTeX and TikZ diagrams in your notes. Forked from [obsidian-tikzjax](https://github.com/artisticat1/obsidian-tikzjax) v0.5.2 with significant improvements.
 
 You can render graphs, figures, circuits, chemical diagrams, commutative diagrams, and more.
+
+## What's new in Enhanced
+
+- **Diagram UI**: Toolbar with export button, zoom controls, and cache indicator
+- **Zoom**: Click diagram to toggle 1x/2x, or use toolbar buttons (50%–200%)
+- **Export**: Download diagrams as SVG or PNG
+- **Custom preamble**: Global `\usepackage`, `\newcommand`, `\usetikzlibrary` in settings
+- **Per-block scale**: Add `% scale: 1.5` comment to scale individual diagrams
+- **Alt text**: Add `% alt: description` for SVG accessibility
+- **TTL cache**: Memory + persistent cache with configurable expiration
+- **Error display**: Structured error messages with collapsible details
+- **Dark mode**: Automatic color inversion for diagram visibility
+- **Security fixes**: Safe SVG insertion via DOMParser (no innerHTML/outerHTML)
+
+## Available packages
 
 The following packages are available in `\usepackage{}`:
 - chemfig
@@ -22,9 +37,23 @@ The following packages are available in `\usepackage{}`:
 Content inside of `tikz` code blocks will be rendered by TikZJax.
 
 - Remember to load any packages you need with `\usepackage{}`, and include `\begin{document}` and `\end{document}`.
-
 - The standalone document class is used (`\documentclass{standalone}`).
 
+### Per-block options
+
+Add special comments at the top of your tikz code block:
+
+````latex
+```tikz
+% scale: 1.5
+% alt: A plot of sine and cosine functions
+\begin{document}
+  \begin{tikzpicture}
+    ...
+  \end{tikzpicture}
+\end{document}
+```
+````
 
 ### Examples
 <img width=300 align="right" src="./imgs/img1.png">
@@ -98,27 +127,14 @@ to[R=$R_2$, i>_=$i_2$]
 \begin{document}
 \begin{tikzcd}
 
-    T
-    \arrow[drr, bend left, "x"]
-    \arrow[ddr, bend right, "y"]
-    \arrow[dr, dotted, "{(x,y)}" description] & & \\
-    K & X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
-    & X \arrow[d, "f"] \\
-    & Y \arrow[r, "g"]
-    & Z
-
-\end{tikzcd}
-
-\quad \quad
-
-\begin{tikzcd}[row sep=2.5em]
-
-A' \arrow[rr,"f'"] \arrow[dr,swap,"a"] \arrow[dd,swap,"g'"] &&
-  B' \arrow[dd,swap,"h'" near start] \arrow[dr,"b"] \\
-& A \arrow[rr,crossing over,"f" near start] &&
-  B \arrow[dd,"h"] \\
-C' \arrow[rr,"k'" near end] \arrow[dr,swap,"c"] && D' \arrow[dr,swap,"d"] \\
-& C \arrow[rr,"k"] \arrow[uu,<-,crossing over,"g" near end]&& D
+    T
+    \arrow[drr, bend left, "x"]
+    \arrow[ddr, bend right, "y"]
+    \arrow[dr, dotted, "{(x,y)}" description] & & \\
+    K & X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
+    & X \arrow[d, "f"] \\
+    & Y \arrow[r, "g"]
+    & Z
 
 \end{tikzcd}
 
@@ -126,52 +142,27 @@ C' \arrow[rr,"k'" near end] \arrow[dr,swap,"c"] && D' \arrow[dr,swap,"d"] \\
 ```
 ````
 
-<img width=325 align="right" src="./imgs/img5.png">
+## Settings
 
-````latex
-```tikz
-\usepackage{chemfig}
-\begin{document}
+Settings are organized into sections:
 
-\chemfig{[:-90]HN(-[::-45](-[::-45]R)=[::+45]O)>[::+45]*4(-(=O)-N*5(-(<:(=[::-60]O)-[::+60]OH)-(<[::+0])(<:[::-108])-S>)--)}
-
-\end{document}
-```
-````
-
-<img width=310 align="right" src="./imgs/img6.png">
-
-````latex
-```tikz
-\usepackage{chemfig}
-\begin{document}
-
-\definesubmol\fragment1{
-
-    (-[:#1,0.85,,,draw=none]
-    -[::126]-[::-54](=_#(2pt,2pt)[::180])
-    -[::-70](-[::-56.2,1.07]=^#(2pt,2pt)[::180,1.07])
-    -[::110,0.6](-[::-148,0.60](=^[::180,0.35])-[::-18,1.1])
-    -[::50,1.1](-[::18,0.60]=_[::180,0.35])
-    -[::50,0.6]
-    -[::110])
-    }
-
-\chemfig{
-!\fragment{18}
-!\fragment{90}
-!\fragment{162}
-!\fragment{234}
-!\fragment{306}
-}
-
-\end{document}
-```
-````
-
-## Contributing
-Contributions are welcome! For information on building Tikzjax, have a look at the [contributing guide](https://github.com/artisticat1/obsidian-tikzjax/issues/68), courtesy of [@thecodechemist99](https://github.com/thecodechemist99).
+| Section | Options |
+|---------|---------|
+| **Appearance** | Invert dark colors in dark mode, default scale factor |
+| **LaTeX** | Custom preamble |
+| **Rendering** | Show error messages |
+| **Cache** | Enable cache, TTL, cache indicator, clear cache |
+| **Export** | Default format (SVG/PNG), PNG export scale |
+| **Debug** | Debug mode |
 
 ## Acknowledgements
-This plugin would not be possible without [TikZJax](https://github.com/kisonecat/tikzjax) by [@kisonecat](https://github.com/kisonecat)! In particular, it uses
-[@drgrice1's fork](https://github.com/drgrice1/tikzjax/tree/ww-modifications) that adds some additional features.
+
+This plugin is a fork of [obsidian-tikzjax](https://github.com/artisticat1/obsidian-tikzjax) by [@artisticat1](https://github.com/artisticat1).
+
+It would not be possible without [TikZJax](https://github.com/kisonecat/tikzjax) by [@kisonecat](https://github.com/kisonecat). In particular, it uses [@drgrice1's fork](https://github.com/drgrice1/tikzjax/tree/ww-modifications) that adds some additional features.
+
+Design patterns (diagram UI, cache system, error handling) are inspired by [obsidian-tikz-advanced](https://github.com/deltazita/obsidian-tikz-advanced).
+
+## License
+
+MIT License. See [LICENSE.md](LICENSE.md) for details.

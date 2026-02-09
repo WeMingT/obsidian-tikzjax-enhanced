@@ -1,0 +1,175 @@
+/* TikZJax Enhanced — UI component styles */
+
+/* Container */
+.tikz-enhanced-container {
+	position: relative;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m, 6px);
+	overflow: visible;
+	margin: 0.5em 0;
+	background: var(--background-primary);
+}
+
+/* Toolbar */
+.tikz-enhanced-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 8px;
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+	font-size: var(--font-ui-smaller, 12px);
+	min-height: 32px;
+}
+
+.tikz-enhanced-spacer {
+	flex: 1;
+}
+
+.tikz-enhanced-btn {
+	min-width: 44px;
+	min-height: 28px;
+	padding: 4px 10px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s, 4px);
+	background: var(--interactive-normal);
+	color: var(--text-normal);
+	cursor: pointer;
+	font-size: var(--font-ui-smaller, 12px);
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tikz-enhanced-btn:hover {
+	background: var(--interactive-hover);
+}
+
+.tikz-enhanced-btn:focus-visible {
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: 1px;
+}
+
+.tikz-enhanced-zoom-label {
+	min-width: 40px;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+	color: var(--text-muted);
+	user-select: none;
+}
+
+.tikz-enhanced-cache-indicator {
+	padding: 2px 6px;
+	border-radius: var(--radius-s, 4px);
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.tikz-enhanced-export-btn::after {
+	content: " \25BE";
+}
+
+/* Content */
+.tikz-enhanced-content {
+	padding: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 80px;
+	overflow: auto;
+}
+
+.tikz-enhanced-content svg {
+	height: auto;
+}
+
+/* Zoom states */
+.tikz-enhanced-zoom-1 .tikz-enhanced-content {
+	cursor: zoom-in;
+}
+
+.tikz-enhanced-zoom-2 .tikz-enhanced-content {
+	cursor: zoom-out;
+}
+
+/* Loading spinner */
+.tikz-enhanced-loading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small, 13px);
+	padding: 24px;
+}
+
+.tikz-enhanced-loading::before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid var(--background-modifier-border);
+	border-top-color: var(--interactive-accent);
+	border-radius: 50%;
+	animation: tikz-enhanced-spin 0.8s linear infinite;
+}
+
+@keyframes tikz-enhanced-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Error display */
+.tikz-enhanced-error {
+	border-top: 2px solid var(--text-error, #e53935);
+	background: var(--background-primary);
+	padding: 12px 16px;
+	font-size: var(--font-ui-small, 13px);
+}
+
+.tikz-enhanced-error-header {
+	color: var(--text-error, #e53935);
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	user-select: none;
+}
+
+.tikz-enhanced-error-toggle {
+	font-size: 10px;
+	width: 16px;
+	display: inline-block;
+	text-align: center;
+}
+
+.tikz-enhanced-error-message {
+	margin-top: 8px;
+	padding: 8px 12px;
+	background: rgba(229, 57, 53, 0.08);
+	border-left: 3px solid var(--text-error, #e53935);
+	border-radius: 0 var(--radius-s, 4px) var(--radius-s, 4px) 0;
+	font-family: var(--font-monospace);
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.tikz-enhanced-error-details {
+	margin-top: 8px;
+}
+
+.tikz-enhanced-error-details pre {
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	border-radius: var(--radius-s, 4px);
+	overflow-x: auto;
+	font-size: 12px;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	word-break: break-word;
+}

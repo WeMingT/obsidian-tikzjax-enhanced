@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-tikzjax",
-	"version": "0.5.2",
-	"description": "Render LaTeX and TikZ diagrams in your notes",
+	"name": "tikzjax-enhanced",
+	"version": "0.6.0",
+	"description": "Render LaTeX and TikZ diagrams with enhanced features.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -9,19 +9,19 @@
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "WeMingT",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^16.11.6",
+		"@types/node": "^18.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.2.0",
 		"@typescript-eslint/parser": "^5.2.0",
 		"builtin-modules": "^3.2.0",
-		"esbuild": "0.13.12",
+		"esbuild": "^0.19.0",
 		"obsidian": "latest",
 		"pako": "^2.0.4",
 		"@types/pako": "^1.0.3",
-		"tslib": "2.3.1",
-		"typescript": "4.4.4",
+		"tslib": "^2.6.0",
+		"typescript": "^5.0.0",
 		"esbuild-plugin-inline-import": "^1.0.1",
 		"localforage": "^1.9.0"
 	}

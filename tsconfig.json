@@ -4,9 +4,10 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "ES2018",
     "allowJs": true,
     "noImplicitAny": true,
+    "strictNullChecks": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "isolatedModules": true,
@@ -19,6 +20,6 @@
     ]
   },
   "include": [
-    "**/*.ts"
+    "src/**/*.ts"
   ]
 }
